@@ -1,5 +1,3 @@
-Title: ACEOnline 4.2 Guide (VS2013)
-
 I've talked with Future about it a long time ago, but because he's got no time/or is just lazy. I'm doing it right now.
 
 Let's get started:
@@ -11,7 +9,7 @@ Let's get started:
 First of all you need to download the Source ([URL]https://mega.nz/#!Q8gmwAiL!lqq3DWTX5aYbvOCvPNIN8L7vWFrRm9-eSkEsvtGiXNY[/URL]), it's reworked to be compiled under Visual Studio 2013 (MFC Libraries are needed). Visual Studio 2015 should compile fine aswell, didn't tested it.
 Then you should have a rar file like this:
 [IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/1.PNG[/IMG]
-(It's packet with the RAR5 method, so please be sure to use WinRar 5 or simmilar programs)
+(It's packed with the RAR5 method, so please be sure to use WinRar 5 or simmilar programs)
 [IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/2.PNG[/IMG]
 
 Next you need to extract the source to your harddrive, doesn't matter where it is.
@@ -147,6 +145,8 @@ Now scroll down to find (finally) the DB Data
 *_ODBC_PASSWD is always your DB Password
 *_DB_SERVER_IP is always your DB IP
 *_DB_SERVER_PORT is always your DB Port
+
+Here you'll also need the STR_XOR_KEY_STRING_SERVER_INFO key to encrypt your logins.
 
 (* is a placeholder, because we have several prefixes depending on the use, but all should be the same)
 
