@@ -1,12 +1,14 @@
 Title: ACEOnline 4.2 Guide (VS2013)
 
-I've talked with @Future about it a long time ago, but because he's got no time/or is just lazy. I'm doing it right now.
+I've talked with Future about it a long time ago, but because he's got no time/or is just lazy. I'm doing it right now.
 
 Let's get started:
 
+[COLOR=#ffa500]Edit: When the images are resized: Right click them and open them in a new tab![/COLOR]
+
 [B]Source Compilation[/B]
 
-First of all you need to download the Source (https://mega.nz/#!Q8gmwAiL!lqq3DWTX5aYbvOCvPNIN8L7vWFrRm9-eSkEsvtGiXNY), it's reworked to be compiled under Visual Studio 2013 (MFC Libraries are needed). Visual Studio 2015 should compile fine aswell, didn't tested it.
+First of all you need to download the Source ([URL]https://mega.nz/#!Q8gmwAiL!lqq3DWTX5aYbvOCvPNIN8L7vWFrRm9-eSkEsvtGiXNY[/URL]), it's reworked to be compiled under Visual Studio 2013 (MFC Libraries are needed). Visual Studio 2015 should compile fine aswell, didn't tested it.
 Then you should have a rar file like this:
 [IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/1.PNG[/IMG]
 (It's packet with the RAR5 method, so please be sure to use WinRar 5 or simmilar programs)
@@ -31,7 +33,7 @@ Now click on your solution and select "Build Solution"
 Build should take around 5-10 minutes because Multicore Compile is disabled.
 When the compile is finished, the buildlog should look like this:
 [IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/8.PNG[/IMG]
-[COLOR="#FF0000"]!!! ATTENTION !!![/COLOR]
+[COLOR=#FF0000][B]!!! ATTENTION !!![/B][/COLOR]
 When using other configs then Wikigames_R, you have to set the include paths etc on your own because i just edited the english release config.
 
 Now let's look where our files are (yes, masang splitted them somehow instead of putting all in one final folder)
@@ -82,7 +84,7 @@ Now go back into the main folder and into the bin folder, and copy your server b
 Go back into the main folder and then into the config folder and copy the content of the \GameServer\config\ config folder in the servers config folder.
 [IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/20.PNG[/IMG]
 
-[B]Database Setup:[/b]
+[B]Database Setup:[/B]
 Install a MSSQL Version you want, i'm using MSSQL 2014 Express. Don't forget to check Mixed Mode when asked during the install process. You need to set a password for the user SA, save it somewhere.
 Connect to your database with the SA login data.
 Go to Database, right click it and select Restore Database...
@@ -153,11 +155,14 @@ Now your server should be fine to start :w00t:
 Now you just need a client for it, Search on google for: Ace Online EP 4.2 Client.
 (Don't forget to put your checksummed files into the map folder)
 
-[COLOR="#FF8C00"]I don't know if this is exactly working, because i didn't tied to run it. When problems appear, PM me or reply to the thread so i can fix them. Same with missing things.[/COLOR]
+[COLOR=#FF8C00]I don't know if this is exactly working, because i didn't tied to run it. When problems appear, PM me or reply to the thread so i can fix them. Same with missing things.[/COLOR]
+
+Edit: You can also read the tutorial in text format on my GitHub page with all uncompressed pictures:
+[URL]https://github.com/St0rmy95/AceTutorial[/URL]
 
 [B]Special thanks to:[/B]
 
-@WARonline for the EP4.2 Server Source :thumbup1:
-@Future for the idea and the laziness :P:
+ @[I][B][URL="http://forum.ragezone.com/members/1333372118.html"]WARonline[/URL][/B][/I] for the EP4.2 Server Source :thumbup1:
+ @[I][B][URL="http://forum.ragezone.com/members/1333384503.html"]Future[/URL][/B][/I] for the idea and the laziness :P:
 
 Who finds misspellings can keep them :ott1:
