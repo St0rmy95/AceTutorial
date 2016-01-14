@@ -1,0 +1,163 @@
+Title: ACEOnline 4.2 Guide (VS2013)
+
+I've talked with @Future about it a long time ago, but because he's got no time/or is just lazy. I'm doing it right now.
+
+Let's get started:
+
+[B]Source Compilation[/B]
+
+First of all you need to download the Source (https://mega.nz/#!Q8gmwAiL!lqq3DWTX5aYbvOCvPNIN8L7vWFrRm9-eSkEsvtGiXNY), it's reworked to be compiled under Visual Studio 2013 (MFC Libraries are needed). Visual Studio 2015 should compile fine aswell, didn't tested it.
+Then you should have a rar file like this:
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/1.PNG[/IMG]
+(It's packet with the RAR5 method, so please be sure to use WinRar 5 or simmilar programs)
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/2.PNG[/IMG]
+
+Next you need to extract the source to your harddrive, doesn't matter where it is.
+I extracted it to: C:\EP_42_Source\. 
+It should look like this:
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/3.PNG[/IMG]
+
+Next go to \GameServer\ and open GameServer.sln with Visual Studio 2013
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/4.PNG[/IMG]
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/5.PNG[/IMG]
+
+Now click on the Dropbox under the menu entries to select a build configuration, i recommend Wikigames_R for a simple English Server setup.
+You are free to test/use other configs, depending on the language you are using (all localization files should be included).
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/6.PNG[/IMG]
+
+Now click on your solution and select "Build Solution"
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/7.PNG[/IMG]
+
+Build should take around 5-10 minutes because Multicore Compile is disabled.
+When the compile is finished, the buildlog should look like this:
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/8.PNG[/IMG]
+[COLOR="#FF0000"]!!! ATTENTION !!![/COLOR]
+When using other configs then Wikigames_R, you have to set the include paths etc on your own because i just edited the english release config.
+
+Now let's look where our files are (yes, masang splitted them somehow instead of putting all in one final folder)
+
+DB Editor:
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/9.PNG[/IMG]
+
+Launcher.atm
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/10.PNG[/IMG]
+
+Pre Launcher:
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/11.PNG[/IMG]
+
+Admin Tool, Monitor Tool, Questloader:
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/12.PNG[/IMG]
+
+Server Binaries:
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/13.PNG[/IMG]
+
+
+[B]Server Setup[/B]
+To change the IP, open LocalizationDefineCommon.h and find following lines:
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/14.PNG[/IMG]
+
+Change the define CHOICE_PRE_SERVER_IP_OR_DOMAIN_IN_XOR to your encrypted IP Adress, you can find the XOR codes in AtumParam.h
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/15.PNG[/IMG]
+
+You will need the STR_XOR_KEY_STRING_PRE_SERVER_ADDRESS Key to encrypt your IP for Launcher and PreLauncher.
+
+To change your AdminTool and MonitorTool logins, go to AtumParamProtocolFunctions.cpp and find following lines:
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/16.PNG[/IMG]
+
+The structure of the array is displayed in this picture.
+Here you will need the STR_XOR_KEY_STRING_SERVER_INFO key to encrypt your Logins/IPs.
+
+Recompile your Tools to apply the changes.
+
+[B]Now to the Server:[/B]
+Create somewhere on your harddrive a serverfolder and create in it folders like this:
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/17.PNG[/IMG]
+
+Go into the log folder and create 3 folders like this:
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/18.PNG[/IMG]
+
+Now go back into the main folder and into the bin folder, and copy your server bins into it.
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/19.PNG[/IMG]
+
+Go back into the main folder and then into the config folder and copy the content of the \GameServer\config\ config folder in the servers config folder.
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/20.PNG[/IMG]
+
+[B]Database Setup:[/b]
+Install a MSSQL Version you want, i'm using MSSQL 2014 Express. Don't forget to check Mixed Mode when asked during the install process. You need to set a password for the user SA, save it somewhere.
+Connect to your database with the SA login data.
+Go to Database, right click it and select Restore Database...
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/21.PNG[/IMG]
+
+Now select device and click on the button with the three dots
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/22.PNG[/IMG]
+
+Now click on Add
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/23.PNG[/IMG]
+
+Now navigate to your database backups (they should be in the main directory of your source)
+[/IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/24.PNG[/IMG]
+
+Then click 2 times OK, until you are here:
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/25.PNG[/IMG]
+
+Now select the only existing backup and write your destination database(when not given) into the text field Database.
+Click on OK to restore the Database.
+
+Do the same process with atum2_db_account too.
+
+Now your database should look like this:
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/26.PNG[/IMG]
+
+[B]Config Setup:[/B]
+Get your IP and save it somewhere (either open cmd and type ipconfig or when using hamachi, start it and copy it from there)
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/27.PNG[/IMG]
+
+Now open global.cfg in your config folder and edit folling lines:
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/28.PNG[/IMG
+
+$LOCAL_IP_ADDR is your IP adress (From Hamachi or IPConfig).
+$SERVER_GROUP_NAME is the name of your server.
+$LANGUAGE_TYPE is the language your server is using.
+
+Now scroll down and comment folling lines with a #
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/29.PNG[/IMG]
+just let the first line uncommented. Write there yozr Server Group Name.
+
+Scroll further and comment a few lines too like on the screenshot:
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/30.PNG[/IMG]
+not type into the first line of this block your Server Group Name again and your IP.
+
+Now scroll down until you see:
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/31.PNG[/IMG]
+Change it on your own will. 
+
+The next couple of lines are the allowed IP's to use the Admin tool, write there your IP and all allowed ones.
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/32.PNG[/IMG]
+
+Now scroll down to the Update Settings:
+Change them to your HTTP/FTP Settings (I won't give a AutoUpdate Guide, just search for it)
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/33.PNG[/IMG]
+
+Now scroll down to find (finally) the DB Data
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/34.PNG[/IMG]
+
+*_ODBC_UID is always your DB Login Name
+*_ODBC_PASSWD is always your DB Password
+*_DB_SERVER_IP is always your DB IP
+*_DB_SERVER_PORT is always your DB Port
+
+(* is a placeholder, because we have several prefixes depending on the use, but all should be the same)
+
+Now your server should be fine to start :w00t:
+
+Now you just need a client for it, Search on google for: Ace Online EP 4.2 Client.
+(Don't forget to put your checksummed files into the map folder)
+
+[COLOR="#FF8C00"]I don't know if this is exactly working, because i didn't tied to run it. When problems appear, PM me or reply to the thread so i can fix them. Same with missing things.[/COLOR]
+
+[B]Special thanks to:[/B]
+
+@WARonline for the EP4.2 Server Source :thumbup1:
+@Future for the idea and the laziness :P:
+
+Who finds misspellings can keep them :ott1:
