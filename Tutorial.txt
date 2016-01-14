@@ -97,7 +97,7 @@ Now click on Add
 [IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/23.PNG[/IMG]
 
 Now navigate to your database backups (they should be in the main directory of your source)
-[/IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/24.PNG[/IMG]
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/24.PNG[/IMG]
 
 Then click 2 times OK, until you are here:
 [IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/25.PNG[/IMG]
@@ -115,7 +115,7 @@ Get your IP and save it somewhere (either open cmd and type ipconfig or when usi
 [IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/27.PNG[/IMG]
 
 Now open global.cfg in your config folder and edit folling lines:
-[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/28.PNG[/IMG
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/28.PNG[/IMG]
 
 $LOCAL_IP_ADDR is your IP adress (From Hamachi or IPConfig).
 $SERVER_GROUP_NAME is the name of your server.
