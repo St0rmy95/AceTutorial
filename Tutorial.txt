@@ -73,18 +73,41 @@ Recompile your Tools to apply the changes.
 Create somewhere on your harddrive a serverfolder and create in it folders like this:
 [IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/17.PNG[/IMG]
 
-Go into the log folder and create 3 folders like this:
-[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/18.PNG[/IMG]
-
 Now go back into the main folder and into the bin folder, and copy your server bins into it.
 [IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/19.PNG[/IMG]
 
-Go back into the main folder and then into the config folder and copy the content of the \GameServer\config\ config folder in the servers config folder.
+Create a file called config_root.cfg in your bin folder and add following content into it:
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/Update/13.PNG[/IMG]
+
+Go back into the main folder and then into the config folder and copy the content of the \GameServer\config\ config folder in the servers config folder. (I uploaded a clean config at the end of this guide, you can use it instead of masangs shitty one)
 [IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/20.PNG[/IMG]
 
+Go into the map folder and paste your SMA/DAT files into it. You can find the SMA files somehwere in this forum and DAT files in your client.
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/Update/14.PNG[/IMG]
+
 [B]Database Setup:[/B]
-Install a MSSQL Version you want, i'm using MSSQL 2014 Express. Don't forget to check Mixed Mode when asked during the install process. You need to set a password for the user SA, save it somewhere.
+Install a MSSQL Version you want, i'm using MSSQL 2014 Express (Use the 1.1GB File, it contains everything needed). Don't forget to check Mixed Mode when asked during the install process. You need to set a password for the user SA, save it somewhere.
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/Update/1.PNG[/IMG]
+
+Next configure your DB so that it allows TCP connections
+Start the MSSQL Config Manager and select SQL Server Network Configuration and then Protocols for <Your SQL Servername>. In my case it's MSSQLSERVER.
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/Update/2.PNG[/IMG]
+
+Double click TCP/IP and change the Enabled value to Yes.
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/Update/3.PNG[/IMG]
+
+Now go to the IP Adresses Tab on the window and activate IP2/3 and enter your IP to the IP Adress entry.
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/Update/4.PNG[/IMG]
+
+Now click on OK. A messagebox will show up.
+Click on OK and start your services (services.msc in windows search)
+Find the SQL Server service and restart it with a rightclick and select Restart service. Or Double click on it and click on Stop and after this on Start.
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/Update/6.PNG[/IMG]
+
+Now start your MSSQL management Studio.
 Connect to your database with the SA login data.
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/Update/7.PNG[/IMG]
+
 Go to Database, right click it and select Restore Database...
 [IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/21.PNG[/IMG]
 
@@ -105,12 +128,22 @@ Click on OK to restore the Database.
 
 Do the same process with atum2_db_account too.
 
-Now your database should look like this:
-[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/26.PNG[/IMG]
+To create your own Database users from where the GameServer can connect, select Security -> Logins, right click it and select New Login...
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/Update/8.PNG[/IMG]
+
+Now type into the login name entry your wished login. Select SQL Server authentication and remove the enforce password policy check.
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/Update/9.PNG[/IMG]
+
+Then click on Server roles and select everything (i don't know if it's really neccessary but i'm doing it anyway)
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/Update/10.PNG[/IMG]
+
+Now click on user mapping and check both databases.
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/Update/11.PNG[/IMG]
+
+Now click on OK, an error will appear when you use atum as login, you can ignore it, it just says that the user already exists in the database, it will be overwritten.
 
 [B]Config Setup:[/B]
 Get your IP and save it somewhere (either open cmd and type ipconfig or when using hamachi, start it and copy it from there)
-[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/27.PNG[/IMG]
 
 Now open global.cfg in your config folder and edit folling lines:
 [IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/28.PNG[/IMG]
@@ -118,14 +151,6 @@ Now open global.cfg in your config folder and edit folling lines:
 $LOCAL_IP_ADDR is your IP adress (From Hamachi or IPConfig).
 $SERVER_GROUP_NAME is the name of your server.
 $LANGUAGE_TYPE is the language your server is using.
-
-Now scroll down and comment folling lines with a #
-[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/29.PNG[/IMG]
-just let the first line uncommented. Write there yozr Server Group Name.
-
-Scroll further and comment a few lines too like on the screenshot:
-[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/30.PNG[/IMG]
-not type into the first line of this block your Server Group Name again and your IP.
 
 Now scroll down until you see:
 [IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/31.PNG[/IMG]
@@ -146,23 +171,51 @@ Now scroll down to find (finally) the DB Data
 *_DB_SERVER_IP is always your DB IP
 *_DB_SERVER_PORT is always your DB Port
 
-Here you'll also need the STR_XOR_KEY_STRING_SERVER_INFO key to encrypt your logins.
+You don't need to encrypt yout logins in the config.
 
 (* is a placeholder, because we have several prefixes depending on the use, but all should be the same)
 
-Now your server should be fine to start :w00t:
+When starting your server, you should get an error like this:
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/Update/15.PNG[/IMG]
 
-Now you just need a client for it, Search on google for: Ace Online EP 4.2 Client.
+To fix it, go into your Character database (atum2_db_1) and open the table td_DeclarationOfWar with a rightclick on it and "Edit top 200 rows" and change alle dates to a future one.
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/Update/16.PNG[/IMG]
+
+You can update it with your admin tool to, but for this you'll need an account.
+Go into atum2_db_account -> td_Account and add an account with your wished username and password.
+As AccountType you can user 3 types (0 = Normal User, 512 = Game Master, 128 = Administrator)
+To connect with the admin tool, you'll need AccountType 128
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/Update/17.PNG[/IMG]
+
+Now you can login with your admin tool. Then select "User Management" -> InfluenceWar List -> DeclarationOfWar.
+Select the entries and update them.
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/Update/18.PNG[/IMG]
+
+Now your server should be fine to start
+
+When starting the Launcher it should look like this:
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/Update/19.PNG[/IMG]
+
+To update/get your latest Items, start your Monitor tool and select InfoGenerator
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/Update/20.PNG[/IMG]
+
+Select your Database and click on OK
+[IMG]https://raw.githubusercontent.com/St0rmy95/AceTutorial/master/pictures/Update/21.PNG[/IMG]
+
+Paste the generated Omi.tex in your Res-Tex folder in your Client.
+
+Now you just need a client for it, because only the 3.5 Client source is released, you need a precompiled one from masang. Search on google for: Ace Online EP 4.2 Client.
 (Don't forget to put your checksummed files into the map folder)
 
-[COLOR=#FF8C00]I don't know if this is exactly working, because i didn't tied to run it. When problems appear, PM me or reply to the thread so i can fix them. Same with missing things.[/COLOR]
+Here is the clean config:
+[URL]https://mega.nz/#!0x5njB6T!CSjV17BfGMsTx2qTwYRPJ-h9tLtKEtvCGAiA5kMo2QI[/URL]
 
 Edit: You can also read the tutorial in text format on my GitHub page with all uncompressed pictures:
 [URL]https://github.com/St0rmy95/AceTutorial[/URL]
 
 [B]Special thanks to:[/B]
 
- @[I][B][URL="http://forum.ragezone.com/members/1333372118.html"]WARonline[/URL][/B][/I] for the EP4.2 Server Source :thumbup1:
- @[I][B][URL="http://forum.ragezone.com/members/1333384503.html"]Future[/URL][/B][/I] for the idea and the laziness :P:
+ @[I][B][URL="http://forum.ragezone.com/members/1333372118.html"]WARonline[/URL][/B][/I] for the EP4.2 Server Source
+ @[I][B][URL="http://forum.ragezone.com/members/1333384503.html"]Future[/URL][/B][/I] for the idea and the laziness
 
-Who finds misspellings can keep them :ott1:
+Who finds misspellings can keep them!
